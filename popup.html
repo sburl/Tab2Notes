@@ -11,15 +11,15 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-      width: 280px;
-      padding: 16px;
+      width: 360px;
+      padding: 16px 16px 10px;
       background: linear-gradient(160deg, #0f0f17 0%, #1a1a2e 50%, #0d1b2a 100%);
       color: #e8e8e8;
     }
 
     button {
       width: 100%;
-      padding: 20px 20px;
+      padding: 20px;
       margin-bottom: 12px;
       font-size: 15px;
       font-weight: 600;
@@ -33,10 +33,6 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-    }
-
-    button:last-of-type {
-      margin-bottom: 0;
     }
 
     button .main-text {
@@ -74,6 +70,78 @@
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
+    }
+
+    .import-section {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .section-title {
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: #93c5fd;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 68px;
+      max-height: 140px;
+      resize: vertical;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e8e8e8;
+      padding: 8px;
+      font-size: 12px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    textarea::placeholder {
+      color: #9ca3af;
+    }
+
+    .import-action button {
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 12px;
+      gap: 0;
+      margin-bottom: 8px;
+    }
+
+    .import-action .secondary {
+      background: linear-gradient(135deg, #0ea5a4 0%, #10b981 100%);
+    }
+
+    .import-action .secondary:hover {
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+    }
+
+    .import-action .secondary:disabled {
+      background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+      color: #d1d5db;
+      opacity: 1;
+    }
+
+    .url-preview {
+      margin-top: 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 9px;
+      color: #9ca3af;
+      line-height: 1.2;
+      white-space: normal;
+      word-break: break-all;
+    }
+
+    .url-item {
+      opacity: 0.95;
     }
 
     .status {
@@ -119,6 +187,15 @@
     <div class="main-text">Export All Windows</div>
     <div class="sub-text" id="allCount">... tabs</div>
   </button>
+
+  <div class="import-section">
+    <div class="section-title">Open URLs</div>
+    <textarea id="importInput" placeholder="Paste text with links here..."></textarea>
+    <div class="import-action">
+      <button id="scanBtn" class="secondary" disabled>Open Links</button>
+    </div>
+    <div class="url-preview" id="urlPreview"></div>
+  </div>
 
   <p class="status" id="status"></p>
 

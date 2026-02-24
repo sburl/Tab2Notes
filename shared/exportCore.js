@@ -13,9 +13,7 @@ const ExportCore = {
    */
   waitForDownload(downloadId) {
     return new Promise((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Download timeout')), 5000);
-
-      chrome.downloads.onChanged.addListener(function onChanged(delta) {
+      function onChanged(delta) {
         if (delta.id === downloadId && delta.state) {
           if (delta.state.current === 'complete') {
             clearTimeout(timeout);
@@ -27,7 +25,14 @@ const ExportCore = {
             reject(new Error('Download interrupted'));
           }
         }
-      });
+      }
+
+      const timeout = setTimeout(() => {
+        chrome.downloads.onChanged.removeListener(onChanged);
+        reject(new Error('Download timeout'));
+      }, 5000);
+
+      chrome.downloads.onChanged.addListener(onChanged);
     });
   },
 
@@ -308,30 +313,34 @@ const ExportCore = {
    * @returns {Promise<Object>} Result object with success status and message
    */
   async exportWithFallback(tabs, options = {}) {
-    // Try Shortcuts first
-    try {
-      return await this.exportToNotes(tabs, options);
-    } catch (shortcutError) {
-      console.log('Shortcuts failed, trying file download:', shortcutError);
+    const isMac = /Mac/.test(navigator.platform);
 
-      // Try file download
+    // Try Shortcuts first (macOS only — triggerShortcut is a no-op on other platforms)
+    if (isMac) {
       try {
-        return await this.exportToFile(tabs, options);
-      } catch (fileError) {
-        console.log('File download failed, using clipboard:', fileError);
+        return await this.exportToNotes(tabs, options);
+      } catch (shortcutError) {
+        console.log('Shortcuts failed, trying file download:', shortcutError);
+      }
+    }
 
-        // Fallback to clipboard
-        const content = this.formatTabsAsText(tabs, options);
-        const success = await this.copyToClipboard(content);
+    // Non-macOS or Shortcuts failed: try file download
+    try {
+      return await this.exportToFile(tabs, options);
+    } catch (fileError) {
+      console.log('File download failed, using clipboard:', fileError);
 
-        if (success) {
-          return {
-            success: true,
-            message: '📋 Copied to clipboard! Paste into Notes.'
-          };
-        } else {
-          throw new Error('All export methods failed');
-        }
+      // Fallback to clipboard
+      const content = this.formatTabsAsText(tabs, options);
+      const success = await this.copyToClipboard(content);
+
+      if (success) {
+        return {
+          success: true,
+          message: '📋 Copied to clipboard! Paste into Notes.'
+        };
+      } else {
+        throw new Error('All export methods failed');
       }
     }
   }
