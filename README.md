@@ -1,5 +1,8 @@
 # Tab2Notes
 
+**Created:** 2026-02-23-13-46
+**Last Updated:** 2026-02-23-15-44
+
 Export all URLs from your Chrome browser directly to Apple Notes (macOS) or save as a text file.
 
 ## Installation
@@ -21,13 +24,20 @@ Export all URLs from your Chrome browser directly to Apple Notes (macOS) or save
 ## Usage
 
 1. Click the extension icon
-2. Choose an export option:
+2. Choose an action:
    - **Export Current Window** - Export tabs from the current window
    - **Export All Windows** - Export tabs from all open windows
+   - **Open URLs** - Paste text, scan links, and confirm opening
 3. Done!
 
 **With Shortcut (macOS):** A new note appears in Apple Notes automatically
 **Without Shortcut:** Chrome shows a save dialog for a .txt file
+
+### Open URLs Flow
+
+1. Paste any text containing links into the **Open URLs** box — links are extracted instantly
+2. Click **Open N Links** to confirm and open all detected URLs
+3. Tabs open in the current window
 
 ## Export Formats
 
