@@ -39,14 +39,6 @@ Export all URLs from your Chrome browser directly to Apple Notes (macOS) or save
 2. Click **Open N Links** to confirm and open all detected URLs
 3. Tabs open in the current window
 
-## Export Formats
-
-The extension supports multiple export formats:
-
-- **Plain Text** - Simple list of URLs with titles
-- **JSON** - Structured data for programmatic use
-- **Notion** - Formatted for import into Notion
-- **Evernote** - Compatible with Evernote import
 
 ## For Developers
 
