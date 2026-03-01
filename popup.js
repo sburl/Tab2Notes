@@ -10,27 +10,6 @@ function setStatus(statusEl, message, type) {
   statusEl.className = `status ${type}`;
 }
 
-function extractUrlsFromText(text) {
-  const candidates = text.match(/https?:\/\/[^\s<>"'`]+/gi) || [];
-  const seen = new Set();
-  const urls = [];
-
-  for (const candidate of candidates) {
-    const cleaned = candidate.trim().replace(/[),.;!?]+$/g, '');
-    try {
-      const normalized = new URL(cleaned).toString();
-      if (!seen.has(normalized)) {
-        seen.add(normalized);
-        urls.push(normalized);
-      }
-    } catch (_) {
-      // Ignore malformed URLs found in pasted text.
-    }
-  }
-
-  return urls;
-}
-
 function renderImportSummary(urls, urlPreview) {
   urlPreview.textContent = '';
 
@@ -109,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 50);
 
   function updateParsedUrlsUI() {
-    parsedUrls = extractUrlsFromText(importInput.value);
+    parsedUrls = window.extractUrlsFromText(importInput.value);
     renderImportSummary(parsedUrls, urlPreview);
 
     if (parsedUrls.length && !isOpening) {
