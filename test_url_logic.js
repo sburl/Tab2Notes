@@ -39,7 +39,7 @@ function runTests() {
       assert.deepStrictEqual(result, test.expected);
       console.log(`✓ ${test.name}`);
       passed++;
-    } catch (error) {
+    } catch {
       console.error(`✗ ${test.name}`);
       console.error(`  Expected: ${JSON.stringify(test.expected)}`);
       console.error(`  Got:      ${JSON.stringify(extractUrlsFromText(test.input))}`);

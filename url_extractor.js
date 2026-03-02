@@ -11,7 +11,7 @@ function extractUrlsFromText(text) {
         seen.add(normalized);
         urls.push(normalized);
       }
-    } catch (_) {
+    } catch {
       // Ignore malformed URLs found in pasted text.
     }
   }
