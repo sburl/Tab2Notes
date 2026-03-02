@@ -17,7 +17,7 @@ function renderImportSummary(urls, urlPreview) {
     return;
   }
 
-  urls.forEach(url => {
+  urls.forEach((url) => {
     const item = document.createElement('div');
     item.className = 'url-item';
     item.textContent = url;
@@ -26,7 +26,7 @@ function renderImportSummary(urls, urlPreview) {
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function openUrlsInBatches(urls, windowId, statusEl) {
@@ -34,13 +34,15 @@ async function openUrlsInBatches(urls, windowId, statusEl) {
 
   for (let i = 0; i < urls.length; i += BATCH_SIZE) {
     const batch = urls.slice(i, i + BATCH_SIZE);
-    await Promise.all(batch.map(url => {
-      const createOptions = { url, active: false };
-      if (windowId) {
-        createOptions.windowId = windowId;
-      }
-      return chrome.tabs.create(createOptions);
-    }));
+    await Promise.all(
+      batch.map((url) => {
+        const createOptions = { url, active: false };
+        if (windowId) {
+          createOptions.windowId = windowId;
+        }
+        return chrome.tabs.create(createOptions);
+      }),
+    );
 
     opened += batch.length;
     setStatus(statusEl, `Opening links... ${opened}/${urls.length}`, 'info');
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const [freshCurrentWindowTabs, allTabs] = await Promise.all([
         chrome.tabs.query({ currentWindow: true }),
-        chrome.tabs.query({})
+        chrome.tabs.query({}),
       ]);
 
       currentWindowTabs = freshCurrentWindowTabs;
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const confirmed = window.confirm(
-        `Open ${parsedUrls.length} link${parsedUrls.length === 1 ? '' : 's'} now?`
+        `Open ${parsedUrls.length} link${parsedUrls.length === 1 ? '' : 's'} now?`,
       );
       if (!confirmed) {
         return;
@@ -182,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const result = await ExportCore.exportWithFallback(tabs, {
         groupByWindow: isAllWindows,
         title: isAllWindows ? 'Chrome Window Export - All Windows' : 'Chrome Window Export',
-        shortcutName: 'Tab2Notes'
+        shortcutName: 'Tab2Notes',
       });
 
       setStatus(statusEl, result.message, 'success');

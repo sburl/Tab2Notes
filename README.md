@@ -39,7 +39,6 @@ Export all URLs from your Chrome browser directly to Apple Notes (macOS) or save
 2. Click **Open N Links** to confirm and open all detected URLs
 3. Tabs open in the current window
 
-
 ## For Developers
 
 The export functionality is built with a modular architecture using `shared/exportCore.js`. This module can be reused in other Chrome extensions or projects.
@@ -60,25 +59,25 @@ Include the module in your extension's HTML:
 const result = await ExportCore.exportWithFallback(tabs, {
   groupByWindow: true,
   title: 'My Tab Export',
-  shortcutName: 'Tab2Notes'
+  shortcutName: 'Tab2Notes',
 });
 
 // Export to Apple Notes (macOS only)
 const result = await ExportCore.exportToNotes(tabs, {
   title: 'My Tabs',
-  shortcutName: 'YourShortcutName'
+  shortcutName: 'YourShortcutName',
 });
 
 // Export as downloadable file
 const result = await ExportCore.exportToFile(tabs, {
   filename: 'tabs.txt',
-  groupByWindow: false
+  groupByWindow: false,
 });
 
 // Export single tab as JSON
 const result = await ExportCore.exportTabToJSON(tab, {
   filename: 'tab.json',
-  copyToClipboard: true
+  copyToClipboard: true,
 });
 
 // Format tabs as text
@@ -93,10 +92,12 @@ The module handles all the complexity of Chrome's download API, clipboard access
 ## Troubleshooting
 
 **Shortcut doesn't work?**
+
 - Check Shortcuts app for "Tab2Notes" shortcut
 - Make sure you approved the shortcut installation
 
 **Extension not loading?**
+
 - Reload the extension at `chrome://extensions`
 - Check that all files are present in the extension folder
 

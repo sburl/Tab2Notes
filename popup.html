@@ -1,36 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="popup.css">
-</head>
-<body>
-  <button id="exportCurrentBtn">
-    <div class="main-text">Export Current Window</div>
-    <div class="sub-text" id="currentCount">... tabs</div>
-  </button>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <button id="exportCurrentBtn">
+      <div class="main-text">Export Current Window</div>
+      <div class="sub-text" id="currentCount">... tabs</div>
+    </button>
 
-  <button id="exportAllBtn">
-    <div class="main-text">Export All Windows</div>
-    <div class="sub-text" id="allCount">... tabs</div>
-  </button>
+    <button id="exportAllBtn">
+      <div class="main-text">Export All Windows</div>
+      <div class="sub-text" id="allCount">... tabs</div>
+    </button>
 
-  <div class="import-section">
-    <div class="section-title">Open URLs</div>
-    <textarea id="importInput" placeholder="Paste text with links here..."></textarea>
-    <div class="import-action">
-      <button id="scanBtn" class="secondary" disabled>Open Links</button>
+    <div class="import-section">
+      <div class="section-title">Open URLs</div>
+      <textarea id="importInput" placeholder="Paste text with links here..."></textarea>
+      <div class="import-action">
+        <button id="scanBtn" class="secondary" disabled>Open Links</button>
+      </div>
+      <div class="url-preview" id="urlPreview"></div>
     </div>
-    <div class="url-preview" id="urlPreview"></div>
-  </div>
 
-  <p class="status" id="status"></p>
+    <p class="status" id="status"></p>
 
-  <!-- Load shared export module first -->
-  <script src="shared/exportCore.js"></script>
-  <!-- Load separated logic -->
-  <script src="url_extractor.js"></script>
-  <!-- Then load popup logic -->
-  <script src="popup.js"></script>
-</body>
+    <!-- Load shared export module first -->
+    <script src="shared/exportCore.js"></script>
+    <!-- Load separated logic -->
+    <script src="url_extractor.js"></script>
+    <!-- Then load popup logic -->
+    <script src="popup.js"></script>
+  </body>
 </html>
