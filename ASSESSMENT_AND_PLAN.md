@@ -57,3 +57,7 @@ Now that the immediate structural issues (CSS extraction, JS modularization, bas
 
 1.  **Automated Testing:** Hook up `test_url_logic.js` (and future tests) to run automatically on GitHub Actions (or similar CI). (Configured GitHub Actions workflow).
 2.  **Build Script:** Create a simple script to bundle the extension (excluding tests and docs) into a deployable `.zip` file. (Created `build.sh`).
+
+### **Phase 4: Feature Integration (Completed ✔️)**
+
+1.  **Integrate Native Messaging:** Add the `nativeMessaging` permission back to `manifest.json`, create the host configuration JSON, and document the setup steps for users who want advanced background integration.
