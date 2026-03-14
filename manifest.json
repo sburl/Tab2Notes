@@ -3,10 +3,7 @@
   "name": "Tab2Notes",
   "version": "2.0",
   "description": "Export all URLs from your current Chrome window to Apple Notes",
-  "permissions": [
-    "tabs",
-    "downloads"
-  ],
+  "permissions": ["tabs", "downloads"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

@@ -38,3 +38,5 @@ chrome-export-temp.txt
 .vscode/
 .idea/
 *.sublime-*
+tab2notes.zip
+node_modules/

@@ -1,0 +1,31 @@
+{
+  "name": "tab2notes",
+  "version": "1.0.0",
+  "description": "Export all URLs from your Chrome browser directly to Apple Notes (macOS) or save as a text file.",
+  "main": "popup.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "globals": "^15.0.0",
+    "prettier": "^3.0.0"
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check .",
+    "test": "node test_url_logic.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sburl/Tab2Notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sburl/Tab2Notes/issues"
+  },
+  "homepage": "https://github.com/sburl/Tab2Notes#readme"
+}
