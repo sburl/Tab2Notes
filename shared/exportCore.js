@@ -49,7 +49,7 @@ const ExportCore = {
       day: 'numeric',
       hour: 'numeric',
       minute: '2-digit',
-      hour12: true
+      hour12: true,
     });
   },
 
@@ -62,10 +62,7 @@ const ExportCore = {
    * @returns {string} Formatted text content
    */
   formatTabsAsText(tabs, options = {}) {
-    const {
-      groupByWindow = false,
-      title = 'Chrome Window Export'
-    } = options;
+    const { groupByWindow = false, title = 'Chrome Window Export' } = options;
 
     const dateStr = this.formatDate();
     let content = `${title}\n${dateStr}\n${'─'.repeat(40)}\n\n`;
@@ -73,7 +70,7 @@ const ExportCore = {
     if (groupByWindow) {
       // Group tabs by window
       const tabsByWindow = {};
-      tabs.forEach(tab => {
+      tabs.forEach((tab) => {
         if (!tabsByWindow[tab.windowId]) {
           tabsByWindow[tab.windowId] = [];
         }
@@ -120,7 +117,7 @@ const ExportCore = {
       timestamp: new Date().toISOString(),
       title: tab.title || 'Untitled',
       url: tab.url || '',
-      tab_id: tab.id
+      tab_id: tab.id,
     };
     return JSON.stringify(exportData, null, 2);
   },
@@ -140,7 +137,7 @@ const ExportCore = {
       filename = 'export.txt',
       mimeType = 'text/plain',
       saveAs = false,
-      waitForComplete = true
+      waitForComplete = true,
     } = options;
 
     const blob = new Blob([content], { type: mimeType });
@@ -151,7 +148,7 @@ const ExportCore = {
         url: url,
         filename: filename,
         saveAs: saveAs,
-        conflictAction: 'overwrite'
+        conflictAction: 'overwrite',
       });
 
       if (waitForComplete) {
@@ -202,7 +199,7 @@ const ExportCore = {
     const {
       groupByWindow = false,
       title = 'Chrome Window Export',
-      shortcutName = 'Tab2Notes'
+      shortcutName = 'Tab2Notes',
     } = options;
 
     try {
@@ -213,7 +210,7 @@ const ExportCore = {
       await this.downloadFile(content, {
         filename: 'chrome-export-temp.txt',
         saveAs: false,
-        waitForComplete: true
+        waitForComplete: true,
       });
 
       // Trigger Shortcut
@@ -221,7 +218,7 @@ const ExportCore = {
 
       return {
         success: true,
-        message: '✓ Exported to Apple Notes!'
+        message: '✓ Exported to Apple Notes!',
       };
     } catch (error) {
       throw new Error(`Notes export failed: ${error.message}`);
@@ -235,10 +232,7 @@ const ExportCore = {
    * @returns {Promise<Object>} Result object with success status and message
    */
   async exportToFile(tabs, options = {}) {
-    const {
-      groupByWindow = false,
-      title = 'Chrome Window Export'
-    } = options;
+    const { groupByWindow = false, title = 'Chrome Window Export' } = options;
 
     try {
       // Format content
@@ -246,18 +240,18 @@ const ExportCore = {
 
       // Generate filename
       const now = new Date();
-      const filename = `chrome-urls-${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}.txt`;
+      const filename = `chrome-urls-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}.txt`;
 
       // Download with save dialog
       await this.downloadFile(content, {
         filename: filename,
         saveAs: true,
-        waitForComplete: false
+        waitForComplete: false,
       });
 
       return {
         success: true,
-        message: '✓ Exported to .txt file!'
+        message: '✓ Exported to .txt file!',
       };
     } catch (error) {
       throw new Error(`File export failed: ${error.message}`);
@@ -271,10 +265,7 @@ const ExportCore = {
    * @returns {Promise<Object>} Result object with success status and message
    */
   async exportTabToJSON(tab, options = {}) {
-    const {
-      filename = 'current-tab-export.json',
-      copyToClipboard = true
-    } = options;
+    const { filename = 'current-tab-export.json', copyToClipboard = true } = options;
 
     try {
       // Format as JSON
@@ -285,7 +276,7 @@ const ExportCore = {
         filename: filename,
         mimeType: 'application/json',
         saveAs: false,
-        waitForComplete: true
+        waitForComplete: true,
       });
 
       // Copy URL to clipboard
@@ -298,7 +289,7 @@ const ExportCore = {
         success: true,
         message: clipboardSuccess
           ? '✓ Exported! URL also copied to clipboard.'
-          : '✓ URL exported to Downloads folder!'
+          : '✓ URL exported to Downloads folder!',
       };
     } catch (error) {
       throw new Error(`JSON export failed: ${error.message}`);
@@ -337,13 +328,13 @@ const ExportCore = {
       if (success) {
         return {
           success: true,
-          message: '📋 Copied to clipboard! Paste into Notes.'
+          message: '📋 Copied to clipboard! Paste into Notes.',
         };
       } else {
         throw new Error('All export methods failed');
       }
     }
-  }
+  },
 };
 
 // Make available globally for use in popup scripts

@@ -39,3 +39,4 @@ chrome-export-temp.txt
 .idea/
 *.sublime-*
 *.zip
+node_modules/
