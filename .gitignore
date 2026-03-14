@@ -38,3 +38,4 @@ chrome-export-temp.txt
 .vscode/
 .idea/
 *.sublime-*
+*.zip
