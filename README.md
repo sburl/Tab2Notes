@@ -19,20 +19,7 @@ Export all URLs from your Chrome browser directly to Apple Notes (macOS) or save
 
 **Double-click** `Tab2Notes.shortcut` → Click **"Add Shortcut"** → Done!
 
-### 3. Enable Native Messaging for Notes (Advanced/Optional)
-
-For direct background integration with Apple Notes, you can enable the Native Messaging host:
-
-1. Copy the `shared/notes_host.py` script to a secure location (e.g., `/usr/local/bin/notes_host.py`)
-2. Make it executable: `chmod +x /usr/local/bin/notes_host.py`
-3. Edit `shared/com.tab2notes.apple_notes.json`:
-   - Replace `[EXTENSION_ID_HERE]` with your actual extension ID from `chrome://extensions`
-   - Update `path` if you placed `notes_host.py` somewhere else.
-4. Copy the JSON file to Chrome's native messaging directory:
-   - `mkdir -p ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/`
-   - `cp shared/com.tab2notes.apple_notes.json ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/`
-
-> **Windows/Linux users:** Skip steps 2 and 3. The extension will download files instead.
+> **Windows/Linux users:** Skip this step. The extension will download files instead.
 
 ## Usage
 

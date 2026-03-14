@@ -1,7 +1,0 @@
-{
-  "name": "com.tab2notes.apple_notes",
-  "description": "Tab2Notes Apple Notes Native Messaging Host",
-  "path": "/usr/local/bin/notes_host.py",
-  "type": "stdio",
-  "allowed_origins": ["chrome-extension://[EXTENSION_ID_HERE]/"]
-}

@@ -17,12 +17,12 @@ export default [
         ...globals.webextensions,
         ExportCore: 'readonly',
         chrome: 'readonly',
+        extractUrlsFromText: 'readonly',
       },
     },
     rules: {
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-undef': 'error',
-      'preserve-caught-error': 'off',
     },
     ignores: ['node_modules/', 'dist/', '*.zip'],
   },

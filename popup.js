@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 50);
 
   function updateParsedUrlsUI() {
-    parsedUrls = window.extractUrlsFromText(importInput.value);
+    parsedUrls = extractUrlsFromText(importInput.value);
     renderImportSummary(parsedUrls, urlPreview);
 
     if (parsedUrls.length && !isOpening) {
