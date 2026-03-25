@@ -67,6 +67,21 @@ function runTests() {
       expected: [],
     },
     {
+      name: 'Does not extract bare domain from ftp:// URLs',
+      input: 'ftp://example.com/file.txt',
+      expected: [],
+    },
+    {
+      name: 'Does not extract bare domain from mailto: addresses',
+      input: 'mailto:user@example.com/path',
+      expected: [],
+    },
+    {
+      name: 'Does not match partial domain from underscored hostnames',
+      input: 'sub_domain.example.com/path',
+      expected: [],
+    },
+    {
       name: 'Deduplicates bare and protocol versions',
       input: 'https://x.com/user/post and x.com/user/post',
       expected: ['https://x.com/user/post'],
