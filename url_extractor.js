@@ -1,10 +1,17 @@
+const PROTOCOL_RE = 'https?://[^\\s<>"\'`]+';
+const BARE_DOMAIN_RE = '(?<!\\S)(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z]{2,}/[^\\s<>"\'`]*';
+const URL_RE = new RegExp(`${PROTOCOL_RE}|${BARE_DOMAIN_RE}`, 'gi');
+
 function extractUrlsFromText(text) {
-  const candidates = text.match(/https?:\/\/[^\s<>"'`]+/gi) || [];
+  const candidates = text.match(URL_RE) || [];
   const seen = new Set();
   const urls = [];
 
   for (const candidate of candidates) {
-    const cleaned = candidate.trim().replace(/[),.;!?]+$/g, '');
+    let cleaned = candidate.trim().replace(/[),.;!?]+$/g, '');
+    if (!/^https?:\/\//i.test(cleaned)) {
+      cleaned = 'https://' + cleaned;
+    }
     try {
       const normalized = new URL(cleaned).toString();
       if (!seen.has(normalized)) {
