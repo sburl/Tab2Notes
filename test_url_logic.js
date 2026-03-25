@@ -30,6 +30,61 @@ function runTests() {
       input: 'Just some text without any links.',
       expected: [],
     },
+    {
+      name: 'Extracts bare domain with path',
+      input: 'x.com/remilouf/status/2016047512478507444',
+      expected: ['https://x.com/remilouf/status/2016047512478507444'],
+    },
+    {
+      name: 'Extracts multiple bare domains',
+      input: 'x.com/fin465/status/123 and jaredheyman.medium.com/on-rebel-theorem-4-0',
+      expected: [
+        'https://x.com/fin465/status/123',
+        'https://jaredheyman.medium.com/on-rebel-theorem-4-0',
+      ],
+    },
+    {
+      name: 'Extracts bare subdomain URLs',
+      input: 'hks.harvard.edu/publications/investing-unknown',
+      expected: ['https://hks.harvard.edu/publications/investing-unknown'],
+    },
+    {
+      name: 'Mixes bare and protocol URLs',
+      input: 'Check https://example.com and also x.com/user/status/123',
+      expected: ['https://example.com/', 'https://x.com/user/status/123'],
+    },
+    {
+      name: 'Strips trailing punctuation from bare URLs',
+      input: 'See bykahlil.com/writing/design-your-life, and brattle.com/the-untapped-grid/.',
+      expected: [
+        'https://bykahlil.com/writing/design-your-life',
+        'https://brattle.com/the-untapped-grid/',
+      ],
+    },
+    {
+      name: 'Ignores bare domain without path (avoids false positives)',
+      input: 'visit example.com sometime',
+      expected: [],
+    },
+    {
+      name: 'Deduplicates bare and protocol versions',
+      input: 'https://x.com/user/post and x.com/user/post',
+      expected: ['https://x.com/user/post'],
+    },
+    {
+      name: 'Handles real-world pasted list of bare URLs',
+      input:
+        'URL: x.com/remilouf/status/2016047512478507444\n' +
+        'URL: hks.harvard.edu/publications/investing-unknown\n' +
+        'URL: linkedin.com/pulse/something\n' +
+        'URL: dilbagi.notion.site/fabric-architecture-memo',
+      expected: [
+        'https://x.com/remilouf/status/2016047512478507444',
+        'https://hks.harvard.edu/publications/investing-unknown',
+        'https://linkedin.com/pulse/something',
+        'https://dilbagi.notion.site/fabric-architecture-memo',
+      ],
+    },
   ];
 
   let passed = 0;
