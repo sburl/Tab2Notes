@@ -51,7 +51,7 @@ def create_apple_note(title, content):
             text=True
         )
         return True, None
-    except subprocess.CalledProcessError as e:
+    except subprocess.CalledProcessError:
         # Try with default account if iCloud fails
         applescript_fallback = f'''
         tell application "Notes"
@@ -96,6 +96,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 

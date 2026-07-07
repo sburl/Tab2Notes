@@ -9,20 +9,20 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     cooldown:
       default-days: 7
       semver-major-days: 15
       semver-minor-days: 7
       semver-patch-days: 7
     open-pull-requests-limit: 5
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     cooldown:
       default-days: 7
       semver-major-days: 15
