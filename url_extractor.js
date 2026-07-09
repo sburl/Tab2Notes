@@ -4,10 +4,18 @@
  *
  * Fixes (WRK-278):
  *  1. Paren trim  — strip trailing unbalanced closing parens before validation
- *  2. Dedup       — deduplicate on the raw cleaned string *before* normalization
- *                   so that https://x.com and https://x.com/ don't both survive
- *  3. No-URL flag — returns { urls, hasText } so callers can show a warning
+ *  2. Dedup       — deduplicate on the cleaned string before normalization AND
+ *                   on the normalized form, so https://x.com and https://x.com/
+ *                   don't both survive
+ *  3. No-URL case — returns [] so callers can warn when pasted text has no links
+ *
+ * Also supports bare domains without a protocol (e.g. example.com/path),
+ * auto-prefixed with https:// before validation.
  */
+
+const PROTOCOL_RE = 'https?://[^\\s<>"\'`]+';
+const BARE_DOMAIN_RE = '(?<!\\S)(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z]{2,}/[^\\s<>"\'`]*';
+const URL_RE = new RegExp(`${PROTOCOL_RE}|${BARE_DOMAIN_RE}`, 'gi');
 
 /**
  * Strip trailing punctuation and unbalanced closing parens from a URL candidate.
@@ -43,25 +51,24 @@ function trimTrailingPunctuation(candidate) {
  * @returns {string[]} Normalized URL strings
  */
 function extractUrlsFromText(text) {
-  const candidates = text.match(/https?:\/\/[^\s<>"'`]+/gi) || [];
+  const candidates = text.match(URL_RE) || [];
   const seenCleaned = new Set();
   const seenNormalized = new Set();
   const urls = [];
 
   for (const candidate of candidates) {
-    const cleaned = trimTrailingPunctuation(candidate.trim());
+    let cleaned = trimTrailingPunctuation(candidate.trim());
+    if (!/^https?:\/\//i.test(cleaned)) {
+      cleaned = 'https://' + cleaned;
+    }
 
-    // Bug #2 fix: deduplicate on the cleaned string *before* URL normalization.
-    // This prevents e.g. "http://x.com" and "http://x.com/" from both passing
-    // through to the URL constructor, which would normalize them identically but
-    // only the Set(normalized) check would catch the second—which it does—so the
-    // real guard here is also having the pre-normalization cleaned dedupe.
+    // Bug #2 fix: deduplicate on the cleaned string *before* URL normalization,
+    // then again on the normalized form (catches http://x.com vs http://x.com/).
     if (seenCleaned.has(cleaned)) continue;
     seenCleaned.add(cleaned);
 
     try {
       const normalized = new URL(cleaned).toString();
-      // Also deduplicate on normalized form (catches http://x.com vs http://x.com/)
       if (!seenNormalized.has(normalized)) {
         seenNormalized.add(normalized);
         urls.push(normalized);
