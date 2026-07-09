@@ -96,11 +96,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (parsedUrls.length && !isOpening) {
       scanBtn.disabled = false;
       scanBtn.textContent = `Open ${parsedUrls.length} Link${parsedUrls.length === 1 ? '' : 's'}`;
+      // Clear any previous no-URL warning when URLs are now found.
+      statusEl.textContent = '';
+      statusEl.className = 'status';
     } else {
       scanBtn.disabled = true;
       scanBtn.textContent = 'Open Links';
-      statusEl.textContent = '';
-      statusEl.className = 'status';
+
+      // Bug #3 fix: warn the user when they've typed text but no URLs were found.
+      const inputHasText = importInput.value.trim().length > 0;
+      if (inputHasText && !isOpening) {
+        setStatus(statusEl, 'No URLs found in pasted text.', 'error');
+      } else {
+        statusEl.textContent = '';
+        statusEl.className = 'status';
+      }
     }
   }
 
@@ -174,6 +184,21 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshTabCounts();
   });
 
+  /**
+   * Build a human-friendly, date-stamped note title.
+   * e.g. "Tabs – Mon Jun 2, 2026" or "All Tabs – Mon Jun 2, 2026"
+   * (note-naming feature, Apr 18)
+   */
+  function buildNoteTitle(isAllWindows) {
+    const dateStr = new Date().toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    return isAllWindows ? `All Tabs – ${dateStr}` : `Tabs – ${dateStr}`;
+  }
+
   async function performExport(tabs, isAllWindows) {
     exportCurrentBtn.disabled = true;
     exportAllBtn.disabled = true;
@@ -183,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const result = await ExportCore.exportWithFallback(tabs, {
         groupByWindow: isAllWindows,
-        title: isAllWindows ? 'Chrome Window Export - All Windows' : 'Chrome Window Export',
+        title: buildNoteTitle(isAllWindows),
         shortcutName: 'Tab2Notes',
       });
 
