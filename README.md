@@ -1,43 +1,53 @@
 # Tab2Notes
 
 **Created:** 2026-02-23-13-46
-**Last Updated:** 2026-02-23-15-44
+**Last Updated:** 2026-09-16
 
 Export all URLs from your Chrome browser directly to Apple Notes (macOS) or save as a text file.
 
-## Installation
+## Install Tab2Notes
 
-### 1. Install the Extension
+**[Add to Chrome](https://chromewebstore.google.com/detail/tab2notes/gbpnligkgocgadiknklabehjdjfnopph)** · **[Download the Apple Shortcut](https://github.com/sburl/Tab2Notes/raw/refs/heads/main/Tab2Notes.shortcut)**
 
-1. Open Chrome and go to `chrome://extensions`
-2. Enable **Developer mode** (toggle in top-right)
-3. Click **Load unpacked**
-4. Select this folder
-5. Pin to toolbar (optional): Click puzzle icon → Pin "Tab2Notes"
+### 1. Add the extension
 
-### 2. Enable Apple Notes Integration (macOS only)
+1. Open [Tab2Notes in the Chrome Web Store](https://chromewebstore.google.com/detail/tab2notes/gbpnligkgocgadiknklabehjdjfnopph) using Chrome.
+2. Click **Add to Chrome**, then **Add extension**.
+3. Click Chrome's puzzle-piece icon and pin **Tab2Notes** so it's easy to find.
 
-**Double-click** `Tab2Notes.shortcut` → Click **"Add Shortcut"** → Done!
+No GitHub account, code download, or Developer mode is needed.
 
-> **Windows/Linux users:** Skip this step. The extension will download files instead.
+### 2. On a Mac, connect Apple Notes
+
+1. [Download Tab2Notes.shortcut](https://github.com/sburl/Tab2Notes/raw/refs/heads/main/Tab2Notes.shortcut).
+2. Open the downloaded file from your Downloads folder.
+3. Click **Add Shortcut** in Apple's Shortcuts app. Keep its name **Tab2Notes**.
+
+Version 2.1.0 also links to this download at the bottom of its popup. If Shortcuts asks for access to Notes or the downloaded text file on first use, review and allow that access to complete the export.
+
+**Windows or Linux?** Skip step 2. Your tabs are exported to a text file instead.
 
 ## Usage
 
 1. Click the extension icon
 2. Choose an action:
-   - **Export Current Window** - Export tabs from the current window
-   - **Export All Windows** - Export tabs from all open windows
-   - **Open URLs** - Paste text, scan links, and confirm opening
+   - **Current window** - Export tabs from the current window
+   - **All windows** - Export tabs from all open windows
+   - **Bring tabs back** - Paste text, then click **Open Links** and confirm
 3. Done!
 
 **With Shortcut (macOS):** A new note appears in Apple Notes automatically
-**Without Shortcut:** Chrome shows a save dialog for a .txt file
+**On macOS:** Install the Shortcut first. The extension can launch Shortcuts, but cannot confirm that a note was created.
 
 ### Open URLs Flow
 
 1. Paste any text containing links into the **Open URLs** box — links are extracted instantly
 2. Click **Open N Links** to confirm and open all detected URLs
 3. Tabs open in the current window
+
+## Developer installation
+
+For development only: download or clone this repository, open `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, and select the folder containing `manifest.json`.
 
 ## For Developers
 
@@ -104,3 +114,7 @@ The module handles all the complexity of Chrome's download API, clipboard access
 ## License
 
 MIT — Free to use and modify.
+
+## Notebook interface
+
+Version 2.1.0 adds a textured notebook design, amber current-window export, blue all-window export, system light/dark themes, and matching toolbar icons. The footer links directly to the Apple Shortcut download. Export saves a copy and leaves tabs open.

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Tab2Notes notebook</title>
+  <rect x="91" y="25" width="29" height="28" rx="6" fill="#f26332"/>
+  <rect x="91" y="59" width="29" height="28" rx="6" fill="#3556d8"/>
+  <rect x="9" y="6" width="98" height="116" rx="15" fill="#efbc43"/>
+  <path d="M24 6h7v116h-7z" fill="#263f99"/>
+  <rect x="41" y="30" width="53" height="61" rx="5" fill="#fff6df"/>
+  <path d="M51 46h32M51 58h32M51 70h20" fill="none" stroke="#263f99" stroke-width="6" stroke-linecap="round"/>
+</svg>
