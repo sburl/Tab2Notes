@@ -1,36 +1,88 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tab2Notes</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <button id="exportCurrentBtn">
-      <div class="main-text">Export Current Window</div>
-      <div class="sub-text" id="currentCount">... tabs</div>
-    </button>
-
-    <button id="exportAllBtn">
-      <div class="main-text">Export All Windows</div>
-      <div class="sub-text" id="allCount">... tabs</div>
-    </button>
-
-    <div class="import-section">
-      <div class="section-title">Open URLs</div>
-      <textarea id="importInput" placeholder="Paste text with links here..."></textarea>
-      <div class="import-action">
-        <button id="scanBtn" class="secondary" disabled>Open Links</button>
+    <header class="app-header">
+      <img class="app-mark" src="icons/icon48.png" width="40" height="40" alt="" />
+      <div>
+        <h1>Tab<span class="brand-two">2</span>Notes</h1>
+        <p>A little room to think.</p>
       </div>
-      <div class="url-preview" id="urlPreview"></div>
-    </div>
+    </header>
 
-    <p class="status" id="status"></p>
+    <main>
+      <section aria-labelledby="save-heading">
+        <div class="section-heading">
+          <h2 id="save-heading">Save your tabs</h2>
+          <span>Pick up later</span>
+        </div>
+        <div class="export-actions">
+          <button
+            id="exportCurrentBtn"
+            class="export-button primary"
+            aria-label="Export current window tabs"
+          >
+            <span class="button-icon" aria-hidden="true"
+              ><svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="M3 9h18" /></svg
+            ></span>
+            <span class="button-copy"
+              ><span class="main-text">Current window</span
+              ><span class="sub-text" id="currentCount">… tabs</span></span
+            >
+            <span class="arrow" aria-hidden="true">↗</span>
+          </button>
+          <button id="exportAllBtn" class="export-button" aria-label="Export all window tabs">
+            <span class="button-icon" aria-hidden="true"
+              ><svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1" />
+                <rect x="3" y="8" width="14" height="13" rx="2" />
+                <path d="M3 12h14" /></svg
+            ></span>
+            <span class="button-copy"
+              ><span class="main-text">All windows</span
+              ><span class="sub-text" id="allCount">… tabs</span></span
+            >
+            <span class="arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <p class="helper export-hint">Exports a copy. Your tabs stay open.</p>
+      </section>
 
-    <!-- Load shared export module first -->
+      <section class="import-section" aria-labelledby="restore-heading">
+        <div class="section-heading">
+          <h2 id="restore-heading"><label for="importInput">Bring tabs back</label></h2>
+        </div>
+        <p class="helper" id="importHelp">Paste a saved note, or just the links you need.</p>
+        <textarea
+          id="importInput"
+          aria-describedby="importHelp"
+          placeholder="Paste your links here…"
+          spellcheck="false"
+        ></textarea>
+        <button id="scanBtn" class="restore-button" disabled>Open Links</button>
+        <div class="url-preview" id="urlPreview" aria-label="Links to open"></div>
+      </section>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </main>
+    <footer>
+      Apple Notes on Mac requires the
+      <a
+        href="https://github.com/sburl/Tab2Notes/raw/refs/heads/main/Tab2Notes.shortcut"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Tab2Notes Shortcut</a
+      >.
+    </footer>
+
     <script src="shared/exportCore.js"></script>
-    <!-- Load separated logic -->
     <script src="url_extractor.js"></script>
-    <!-- Then load popup logic -->
     <script src="popup.js"></script>
   </body>
 </html>
